@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createRenderer } from "fela";
+import { RendererProvider, ThemeProvider } from "react-fela";
+
+import "./index.css";
+import { App } from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { theme } from "./theme.js";
+
+const renderer = createRenderer({
+  devMode: true
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RendererProvider renderer={renderer}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </RendererProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
