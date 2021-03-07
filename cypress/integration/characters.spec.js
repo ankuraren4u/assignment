@@ -11,7 +11,7 @@ const Element_Mapping = {
     elementActive: "active"
   },
   url: {
-      character: '/character/{1}'
+    character: "/character/{1}"
   }
 };
 
@@ -83,8 +83,11 @@ describe("Starwar Characters", () => {
       .request(`${API_BASE_URL}/search/${First_Query}`)
       .should(response => {
         let content = response.body.characters;
-        cy.visit(Element_Mapping.url.character.replace('{1}', content[2].id));
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[2].name);
+        cy.visit(Element_Mapping.url.character.replace("{1}", content[2].id));
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[2].name
+        );
       });
   });
 
@@ -99,9 +102,15 @@ describe("Starwar Characters", () => {
       .request(`${API_BASE_URL}/search/${First_Query}`)
       .should(response => {
         let content = response.body.characters;
-        cy.url().should("include", Element_Mapping.url.character.replace('{1}', content[1].id));
+        cy.url().should(
+          "include",
+          Element_Mapping.url.character.replace("{1}", content[1].id)
+        );
         cy.get(Element_Mapping.selectors.suggestionList).should("not.exist");
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[1].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[1].name
+        );
 
         cy.get(Element_Mapping.selectors.autosuggest)
           .find("input")
@@ -111,10 +120,16 @@ describe("Starwar Characters", () => {
           .type("{downarrow}")
           .type("{downarrow}")
           .type("{enter}");
-        
-        cy.url().should("include", Element_Mapping.url.character.replace('{1}', content[2].id));
+
+        cy.url().should(
+          "include",
+          Element_Mapping.url.character.replace("{1}", content[2].id)
+        );
         cy.get(Element_Mapping.selectors.suggestionList).should("not.exist");
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[2].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[2].name
+        );
       });
   });
 
@@ -136,9 +151,15 @@ describe("Starwar Characters", () => {
       .request(`${API_BASE_URL}/search/${First_Query}`)
       .should(response => {
         let content = response.body.characters;
-        cy.url().should("include", Element_Mapping.url.character.replace('{1}', content[1].id));
+        cy.url().should(
+          "include",
+          Element_Mapping.url.character.replace("{1}", content[1].id)
+        );
         cy.get(Element_Mapping.selectors.suggestionList).should("not.exist");
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[1].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[1].name
+        );
 
         cy.get(Element_Mapping.selectors.autosuggest)
           .find("input")
@@ -148,9 +169,15 @@ describe("Starwar Characters", () => {
           .eq(2)
           .click();
 
-        cy.url().should("include", Element_Mapping.url.character.replace('{1}', content[2].id));
+        cy.url().should(
+          "include",
+          Element_Mapping.url.character.replace("{1}", content[2].id)
+        );
         cy.get(Element_Mapping.selectors.suggestionList).should("not.exist");
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[2].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[2].name
+        );
       });
   });
 
@@ -175,14 +202,20 @@ describe("Starwar Characters", () => {
           .eq(2)
           .click();
         //Back Navigation
-        cy.go('back');
+        cy.go("back");
         cy.url().should("include", `/character/${content[1].id}`);
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[2].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[2].name
+        );
 
         //Forward Navigation
-        cy.go('forward');
+        cy.go("forward");
         cy.url().should("include", `/character/${content[2].id}`);
-        cy.get(Element_Mapping.selectors.tableView).should("contain", content[2].name);
+        cy.get(Element_Mapping.selectors.tableView).should(
+          "contain",
+          content[2].name
+        );
       });
   });
 });
