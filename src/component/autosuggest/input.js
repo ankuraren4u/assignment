@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useFela } from "react-fela";
 import { inputStyles } from "./styles";
-// import { useCallback } from "react";
 
 const InputInternal = props => {
   const {
@@ -32,6 +31,16 @@ const InputInternal = props => {
     toggleSuggestion(true);
   };
 
+  const handleKeyDown = event => {
+    const { keyCode } = event;
+    switch (keyCode) {
+      // ArrowDown
+      case 40: 
+      case 38: 
+        event.preventDefault();
+    }
+  }
+
   const handleKeyUp = event => {
     const { keyCode } = event;
     const lastIndex = suggestionsCount - 1;
@@ -44,12 +53,16 @@ const InputInternal = props => {
       case 39: // Array Right
         break;
 
-      case 40: // ArrowDown
+      // ArrowDown
+      case 40: 
+        event.preventDefault();
         return updateFocus(
           activeSuggestionIndex === lastIndex ? 0 : activeSuggestionIndex + 1
         );
 
-      case 38: // ArrowUp
+      // ArrowUp
+      case 38: 
+        event.preventDefault();
         return updateFocus(
           activeSuggestionIndex === 0 ? lastIndex : activeSuggestionIndex - 1
         );
@@ -91,6 +104,7 @@ const InputInternal = props => {
       onFocus={handleFocus}
       className={css([inputStyles, propStyles])}
       onKeyUp={handleKeyUp}
+      onKeyDown={handleKeyDown}
       onChange={onChange}
       {...inputRestProps}
     />

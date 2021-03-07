@@ -7,9 +7,9 @@ import { TableView } from "./../../component/";
 import { containerStyle } from "./style";
 
 export const Character = () => {
-  const { id } = useParams();
   const { css } = useFela();
-
+  const { id } = useParams();
+  
   const [character, fetchCharacter] = useFetchCharacter();
 
   useEffect(() => {

@@ -14,7 +14,17 @@ export const SuggestionInternal = ({
   const { css } = useFela({ isActive });
   const ref = React.createRef();
   useEffect(() => {
-    isActive && ref.current.scrollIntoView(false);
+    if (!isActive) {
+      return 
+    }
+
+    const parentEleent = ref.current.parentElement;
+    if(parentEleent.scrollTop > (ref.current.offsetTop)) {
+      ref.current.scrollIntoView(true);
+    }
+    if((parentEleent.scrollTop  + parentEleent.clientHeight)  < ref.current.offsetTop + ref.current.offsetHeight) {
+      ref.current.scrollIntoView(false);
+    }
   }, [isActive, ref]);
 
   const handleMouseOver = () => {
@@ -41,7 +51,6 @@ export const SuggestionInternal = ({
   }
   return (
     <li
-      key={suggestion.id}
       onMouseOver={handleMouseOver}
       onMouseDown={handleOnMouseDown}
       ref={ref}
@@ -61,5 +70,3 @@ SuggestionInternal.propTypes = {
 };
 
 export const Suggestion = React.memo(SuggestionInternal);
-
-// export const Suggestion = SuggestionInternal;

@@ -27,7 +27,7 @@ export const suggestionWrapperStyles = ({ theme }) => ({
   left: "0",
   right: "0",
   overflow: "scroll",
-  height: "150px",
+  maxHeight: "150px",
   listStyle: "none",
   padding: 0
 });
