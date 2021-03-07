@@ -1,11 +1,15 @@
 import { useState, useCallback } from "react";
 import { memoize } from "lodash";
-import { API_BASE_URL } from "./const";
 
-const API_URl = `${API_BASE_URL}/characters/{id}`;
+import { GET_CHARACTER_API_URl } from "./const";
+
 const getCharacter = memoize(async id => {
-  let url = API_URl.replace("{id}", id);
-  return (await (await fetch(url)).json()).character || {};
+  try {
+    let url = GET_CHARACTER_API_URl.replace("{id}", id);
+    return (await (await fetch(url)).json()).character || {};
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 export const useFetchCharacter = () => {
