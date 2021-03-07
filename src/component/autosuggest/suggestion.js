@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useFela } from "react-fela";
+import classnames from "classnames";
 import { suggestionStyle } from "./styles";
 export const SuggestionInternal = ({
   suggestion,
@@ -28,7 +29,15 @@ export const SuggestionInternal = ({
   if (suggestionRenderer) {
     element = suggestionRenderer(suggestion, isActive);
   } else {
-    element = <div className={css(suggestionStyle)}>{suggestion.name}</div>;
+    element = (
+      <div
+        className={classnames(css(suggestionStyle), {
+          active: isActive
+        })}
+      >
+        {suggestion.name}
+      </div>
+    );
   }
   return (
     <li

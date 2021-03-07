@@ -76,7 +76,7 @@ const InputInternal = props => {
     if (query && query.length) {
       onQueryChange(query);
     } else {
-      onSuggestionsClear();
+      onSuggestionsClear && onSuggestionsClear();
     }
 
     updateInputValue(query);
@@ -105,8 +105,8 @@ InputInternal.propTypes = {
   updateInputValue: PropTypes.func.isRequired,
   activeSuggestionIndex: PropTypes.number.isRequired,
   suggestionsCount: PropTypes.number.isRequired,
-  onQueryChange: PropTypes.func.isRequired,
   updateFocus: PropTypes.func.isRequired,
+  onQueryChange: PropTypes.func.isRequired,
   onSelectSuggestion: PropTypes.func.isRequired,
   onSuggestionsClear: PropTypes.func,
   inputRestProps: PropTypes.object

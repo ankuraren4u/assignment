@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useFela } from "react-fela";
+import classnames from 'classnames';
 import { suggestionWrapperStyles } from "./styles";
 import { Suggestion } from "./suggestion";
 export const SuggestionsList = ({
@@ -13,7 +14,7 @@ export const SuggestionsList = ({
   const { css } = useFela();
 
   return (
-    <ul className={css(suggestionWrapperStyles)}>
+    <ul className={classnames(css(suggestionWrapperStyles), 'ui-suggestion-list')}>
       {suggestions &&
         suggestions.map((suggestion, idx) => (
           <Suggestion

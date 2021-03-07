@@ -36,6 +36,7 @@ export const Autosuggest = props => {
 
   const handleSuggestionsClear = useCallback(() => {
     updateActiveSuggestionIndex(0);
+    updateInputValue("");
     onSuggestionsClear();
   }, [onSuggestionsClear]);
 
@@ -55,9 +56,9 @@ export const Autosuggest = props => {
       <Input
         inputValue={inputValue}
         updateInputValue={updateInputValue}
-        updateFocus={updateFocus}
         activeSuggestionIndex={activeSuggestionIndex}
         suggestionsCount={(suggestions && suggestions.length) || 0}
+        updateFocus={updateFocus}
         onQueryChange={handleQueryChange}
         onSelectSuggestion={onSelectSuggestion}
         onSuggestionsClear={handleSuggestionsClear}
