@@ -1,8 +1,8 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import { debounce } from "lodash";
 import fetchMock from "jest-fetch-mock";
-import { useFetchCharacter } from ".";
-import { GET_CHARACTER_API_URl } from "./const";
+import { useFetchCharacter } from "..";
+import { GET_CHARACTER_API_URl } from "../const";
 
 jest.mock("lodash", () => {
   const module = jest.requireActual("lodash");

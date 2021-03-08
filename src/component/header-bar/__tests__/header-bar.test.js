@@ -1,5 +1,5 @@
-import { HeaderBar } from ".";
-import { felaShallow, felaMount } from "../../test-utils/";
+import { HeaderBar } from "..";
+import { felaShallow } from "./../../../test-utils/";
 describe("<HeaderBar />", () => {
   describe('By default', () => {
     let component;

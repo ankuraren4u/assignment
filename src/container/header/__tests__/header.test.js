@@ -1,5 +1,5 @@
-import { Header } from ".";
-import { felaShallow } from "../../test-utils/";
+import { Header } from "..";
+import { felaShallow } from "../../../test-utils/";
 describe("<Header />", () => {
   describe("By default", () => {
     let component;
@@ -17,5 +17,7 @@ describe("<Header />", () => {
       };
       expect(clickEvent).not.toThrow();
     });
+
+    /* TODO: ADD More tests */
   });
 });

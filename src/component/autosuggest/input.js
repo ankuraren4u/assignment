@@ -33,16 +33,6 @@ const InputInternal = props => {
 
   const handleKeyDown = event => {
     const { keyCode } = event;
-    switch (keyCode) {
-      // ArrowDown
-      case 40: 
-      case 38: 
-        event.preventDefault();
-    }
-  }
-
-  const handleKeyUp = event => {
-    const { keyCode } = event;
     const lastIndex = suggestionsCount - 1;
     const currentIdx = activeSuggestionIndex;
 
@@ -103,7 +93,6 @@ const InputInternal = props => {
       onBlur={handleBlur}
       onFocus={handleFocus}
       className={css([inputStyles, propStyles])}
-      onKeyUp={handleKeyUp}
       onKeyDown={handleKeyDown}
       onChange={onChange}
       {...inputRestProps}

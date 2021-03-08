@@ -3,8 +3,8 @@ import { debounce } from "lodash";
 import fetchMock from "jest-fetch-mock";
 import { useHistory } from "react-router-dom";
 
-import { useFetchCharacterSuggestions } from ".";
-import { GET_CHARACTER_SUGGESTION_API_URl } from "./const";
+import { useFetchCharacterSuggestions } from "..";
+import { GET_CHARACTER_SUGGESTION_API_URl } from "../const";
 
 const testString = "abc";
 const testID = 1;
