@@ -1,9 +1,11 @@
-import { Character } from "..";
-import { act, renderHook } from "@testing-library/react-hooks";
-
-import { felaShallow } from "./../../../test-utils/";
-import { MemoryRouter, Route, useHistory } from "react-router-dom";
+import { act } from '@testing-library/react';
+import { MemoryRouter, Router, Route  } from "react-router-dom";
+import {createMemoryHistory} from "history";
 import fetchMock from "jest-fetch-mock";
+
+import { felaMount } from "./../../../test-utils/";
+import { Character } from "..";
+
 
 fetchMock.enableMocks();
 
@@ -13,48 +15,65 @@ const mockBody = [
   },
   {
     character: { id: 2, name: "test2" }
+  },
+  {
+    character: { id: 3, name: "test3" }
   }
 ];
 
 describe("<Character />", () => {
   beforeEach(() => {
     fetch.resetMocks();
-  });
-
+  })
   describe("By default", () => {
-    let component;
-    beforeAll(() => {
-      fetch.mockResponse(JSON.stringify(mockBody));
-      component = felaShallow(
-        <MemoryRouter initialEntries={[`/character/${mockBody[0].character.id}`]}>
-          <Route path="/character/:id">
-            <Character />
-          </Route>
-        </MemoryRouter>
-      );
-    });
+    it("renders", async () => {
+      fetch.once(JSON.stringify(mockBody[0]));
+      let component;
+      await act(async () => {
+        component = felaMount(
+          <MemoryRouter initialEntries={[`/character/${mockBody[0].character.id}`]}>
+            <Route path="/character/:id">
+              <Character />
+            </Route>
+          </MemoryRouter>
+        );
+      });
 
-    it("renders", () => {
       expect(component.html()).toMatchSnapshot();
+
     });
 
-    // it("should render the fetched result", () => {
-    //   act(() => {
-    //     expect(fetch).toHaveBeenCalled();
-    //   })
-    // });
+    it("should render the fetched result", async () => {
+      let component;
+      const history = createMemoryHistory();
+      history.push(`/character/${mockBody[1].character.id}`)
+      
+      fetch.once(JSON.stringify(mockBody[1]));
+      await act(async () => {
+        fetch.once(JSON.stringify(mockBody[0]));
+        component = felaMount(
+          <Router history={history}>
+            <Route path="/character/:id">
+              <Character />
+            </Route>
+          </Router>
+        );
+      });
 
-    // it("should render the fetched result", () => {
-    //   act(() => {
-    //     const history = useHistory();
-    //     history.push(`/character/${mockBody[1].character.id}`);
-    //   });
-
-    //   // act(() => {
-    //   //   expect(fetch).toHaveBeenCalled();
-    //   // })
-    // });
+      expect(fetch).toHaveBeenCalled();
+      expect(component.html()).toMatchSnapshot();
+      expect(component.find('.ui-container').exists()).toBeTruthy()
+      
+      await act(async () => {
+        fetch.once(JSON.stringify(mockBody[2]));
+        history.push(`/character/${mockBody[2].character.id}`)
+      })
+      expect(fetch).toHaveBeenCalled();
+      waitFor(() => {
+        expect(component.html()).toMatch(mockBody[2].character.name);
+      })
+     
+    });
   });
-
-  
+    
 });

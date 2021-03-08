@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Character /> By default renders 1`] = `"<div class=\\"ui-container a b c\\"><div class=\\"table-view b d e f g\\"></div></div>"`;
+exports[`<Character /> By default renders 1`] = `"<div class=\\"ui-container a b c\\"><div class=\\"table-view b d e f g\\"><div class=\\"h b i j k l m\\"><div class=\\"d\\">id</div><div class=\\"n\\">1</div></div><div class=\\"h b i j k l m\\"><div class=\\"d\\">name</div><div class=\\"n\\">test1</div></div></div></div>"`;
+
+exports[`<Character /> By default should render the fetched result 1`] = `"<div class=\\"ui-container a b c\\"><div class=\\"table-view b d e f g\\"><div class=\\"h b i j k l m\\"><div class=\\"d\\">id</div><div class=\\"n\\">2</div></div><div class=\\"h b i j k l m\\"><div class=\\"d\\">name</div><div class=\\"n\\">test2</div></div></div></div>"`;
